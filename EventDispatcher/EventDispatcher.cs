@@ -52,7 +52,7 @@ namespace GameKombinat.EventDispatcher {
         /// Maps event type to event handlers.
         /// Max efficiency when calling hooks / events, whatever
         /// </summary>
-        private Dictionary<Type, IEventContainer> registrants;
+        private readonly Dictionary<Type, IEventContainer> registrants;
 
         private EventDispatcher() {
             registrants = new Dictionary<Type, IEventContainer>();
@@ -82,7 +82,6 @@ namespace GameKombinat.EventDispatcher {
             }
             var handles = registrants[paramType];
             handles.Add(handler);
-            registrants[paramType] = handles;
         }
 
         /// <summary>
@@ -97,7 +96,6 @@ namespace GameKombinat.EventDispatcher {
             }
             var handlers = registrants[paramType];
             handlers.Remove(handler);
-            registrants[paramType] = handlers;
         }
 
         /// <summary>
